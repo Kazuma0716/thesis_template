@@ -1,30 +1,15 @@
 version: 2
 jobs:
-    build:
-        docker:
-            - image: paperist/alpine-texlive-ja
-        steps:
-            - run:
-                name: Installing dependancies
-                command: |
-                    apk add --update git
-                    apk add --update openssh
-            - run:
-                name: Git settings
-                command: |
-                    git config --global user.email 'kazuma-narumi@outlook.com'
-                    git config --global user.name 'Kazuma Narumi'
-            - checkout
-            - run:
-                name: Generating current version
-                command: |
-                    latexmk main.tex
-                    cp .latexmkrc ~/.latexmkrc
-            - run:
-                name: Commit to repository
-                command: |
-                    git checkout release-pdf
-                    cp main.pdf dst/main.pdf
-                    git add dst/main.pdf
-                    git commit -m "[CircleCI] Generate PDF @$(date +'%Y/%m/%d %I:%M') [ci skip]"
-                    git push origin release-pdf
+  build:
+    docker:
+      - image: texlive/texlive-full
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apt update
+            apt install -y curl
+      - run:
+          name: Build PDF
+          command: ./compile.sh
