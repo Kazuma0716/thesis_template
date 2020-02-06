@@ -1,22 +1,9 @@
 \chapter{提案手法}\label{chap:method}
 
-ここに書いてある方法を使えば、秒速で秒速で1億円稼ぐ男になれます。なれません。
+\section{問題設定}
 
+今回は、倉庫等特定の環境で稼働するロボットを想定する。予め単眼カメラSLAMを行うロボットの補助のために環境改善が可能であることとする。ここで、環境への影響を最小限に抑えて単眼カメラSLAMが中断する環境を改善する条件を実験により調査する。
 
-\section{SLAMの概要}
+\section{解決方法}
 
-図に書くと図\ref{fig:vq_map_128part}っていう感じ。
-式で書くとだいたい以下のような感じになるんじゃないんかなー。
-式(\ref{eq:j})が肝。
-
-\begin{figure}[h]
-        \begin{center}
-        \includegraphics[width=1.0\linewidth]{figs/vq_map_128part.eps}
-        \caption{Representative Vectors of the $N_c = 128$ Map}
-        \label{fig:vq_map_128part}
-        \end{center}
-\end{figure}
-
-\section{問題}
-
-\section{問題解決}
+単眼カメラSLAMによる特徴点検出ができない環境にマーカを設置することで問題を解決する。このとき、環境への影響が最小限になるようなマーカの範囲を求める。
